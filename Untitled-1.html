@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HONDURASGATE - Investigación Completa</title>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;700&family=Noto+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { background: #f0ede6; color: #1a1a1a; font-family: 'Noto Sans', Arial, sans-serif; font-size: 14px; line-height: 1.55; }
+a { color: #0044bb; }
+a:visited { color: #551a8b; }
+.topbar { background: #cc0000; color: #fff; font-family: 'IBM Plex Mono', monospace; font-size: 11px; padding: 4px 12px; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 4px; }
+.site-header { background: #1a1a1a; color: #f0ede6; padding: 14px 16px 10px; border-bottom: 4px solid #cc0000; }
+.site-header h1 { font-family: 'IBM Plex Mono', monospace; font-size: 32px; font-weight: 700; letter-spacing: 2px; color: #fff; }
+.site-header h1 span { color: #ff4444; }
+.site-header .subtitle { font-size: 12px; color: #aaa; margin-top: 3px; font-family: 'IBM Plex Mono', monospace; }
+.nav-tabs { background: #2a2a2a; display: flex; flex-wrap: wrap; border-bottom: 2px solid #cc0000; }
+.nav-tabs a { color: #ccc; text-decoration: none; font-family: 'IBM Plex Mono', monospace; font-size: 11px; padding: 7px 14px; display: block; border-right: 1px solid #3a3a3a; }
+.nav-tabs a:hover { background: #3a3a3a; color: #fff; }
+.nav-tabs a.active { background: #cc0000; color: #fff; }
+.main-wrap { display: grid; grid-template-columns: 1fr 280px; gap: 0; max-width: 1200px; margin: 0 auto; }
+.content-col { padding: 12px 16px; border-right: 1px solid #c8c3b5; }
+.sidebar-col { padding: 12px; background: #ebe8e0; }
+.alert { background: #fff3cd; border: 1px solid #ffc107; border-left: 4px solid #ffc107; padding: 8px 12px; margin-bottom: 12px; font-size: 13px; }
+.alert.red { background: #ffe5e5; border-color: #cc0000; border-left-color: #cc0000; }
+.alert strong { font-weight: 700; }
+.alert-label { font-family: 'IBM Plex Mono', monospace; font-size: 10px; text-transform: uppercase; letter-spacing: 0.1em; display: block; margin-bottom: 4px; font-weight: 700; }
+.section-header { background: #1a1a1a; color: #fff; font-family: 'IBM Plex Mono', monospace; font-size: 11px; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; padding: 5px 10px; margin: 16px 0 8px; display: flex; align-items: center; gap: 8px; }
+.section-header .num { background: #cc0000; color: #fff; padding: 0 6px; font-size: 10px; }
+.lead-headline { font-size: 22px; font-weight: 700; line-height: 1.25; margin-bottom: 8px; border-bottom: 2px solid #1a1a1a; padding-bottom: 8px; }
+.lead-deck { font-size: 15px; color: #333; margin-bottom: 10px; line-height: 1.5; }
+.byline { font-family: 'IBM Plex Mono', monospace; font-size: 10px; color: #666; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 12px; padding-bottom: 8px; border-bottom: 1px solid #c8c3b5; }
+.body p { margin-bottom: 10px; }
+.body h3 { font-size: 14px; font-weight: 700; margin: 14px 0 6px; padding-left: 8px; border-left: 3px solid #cc0000; }
+.pullq { border-top: 2px solid #1a1a1a; border-bottom: 1px solid #c8c3b5; padding: 10px 12px; margin: 14px 0; background: #e8e4dc; }
+.pullq p { font-size: 16px; font-weight: 700; font-style: italic; line-height: 1.35; margin-bottom: 4px; }
+.pullq cite { font-family: 'IBM Plex Mono', monospace; font-size: 10px; color: #666; text-transform: uppercase; }
+.audio-card { border: 1px solid #b0aa9f; margin-bottom: 8px; background: #fff; }
+.audio-header { display: grid; grid-template-columns: 36px 1fr auto; align-items: center; gap: 8px; padding: 8px 10px; cursor: pointer; background: #e8e4dc; border-bottom: 1px solid #b0aa9f; }
+.audio-header:hover { background: #ddd8ce; }
+.audio-num { font-family: 'IBM Plex Mono', monospace; font-size: 16px; font-weight: 700; color: #cc0000; text-align: center; }
+.audio-title { font-weight: 700; font-size: 13px; }
+.audio-meta-line { font-family: 'IBM Plex Mono', monospace; font-size: 10px; color: #666; margin-top: 1px; }
+.audio-tag { font-family: 'IBM Plex Mono', monospace; font-size: 9px; padding: 2px 6px; border: 1px solid #cc0000; color: #cc0000; white-space: nowrap; text-transform: uppercase; }
+.audio-body { display: none; padding: 10px; }
+.audio-body.open { display: block; }
+.transcript { background: #f5f2eb; border-left: 3px solid #cc0000; padding: 8px 10px; font-style: italic; font-size: 13px; margin-bottom: 8px; line-height: 1.55; }
+.significance { font-size: 12px; color: #444; margin-bottom: 6px; }
+.audio-link { font-family: 'IBM Plex Mono', monospace; font-size: 10px; text-transform: uppercase; letter-spacing: 0.08em; }
+.tl { border-left: 2px solid #666; padding-left: 14px; margin-left: 4px; }
+.tl-item { position: relative; margin-bottom: 14px; }
+.tl-item::before { content: '●'; position: absolute; left: -20px; top: 0; font-size: 10px; color: #cc0000; }
+.tl-item.key::before { font-size: 14px; left: -21px; top: -2px; }
+.tl-date { font-family: 'IBM Plex Mono', monospace; font-size: 10px; color: #666; text-transform: uppercase; }
+.tl-event { font-weight: 700; font-size: 13px; margin: 2px 0; }
+.tl-detail { font-size: 12px; color: #555; }
+table { width: 100%; border-collapse: collapse; font-size: 13px; margin: 10px 0; }
+th { background: #1a1a1a; color: #fff; font-family: 'IBM Plex Mono', monospace; font-size: 10px; text-transform: uppercase; letter-spacing: 0.08em; padding: 6px 8px; text-align: left; font-weight: 500; }
+td { padding: 6px 8px; border-bottom: 1px solid #c8c3b5; vertical-align: top; }
+tr:nth-child(even) td { background: #e8e4dc; }
+tr:hover td { background: #ddd9d1; }
+.sb-box { border: 1px solid #b0aa9f; margin-bottom: 12px; background: #fff; }
+.sb-box-title { background: #1a1a1a; color: #fff; font-family: 'IBM Plex Mono', monospace; font-size: 10px; text-transform: uppercase; letter-spacing: 0.1em; padding: 5px 8px; font-weight: 700; }
+.sb-box-content { padding: 8px 10px; }
+.sb-box-content p { margin-bottom: 6px; font-size: 12px; }
+.stat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
+.stat-item { background: #e8e4dc; border: 1px solid #b0aa9f; padding: 8px 6px; text-align: center; }
+.stat-num { font-family: 'IBM Plex Mono', monospace; font-size: 20px; font-weight: 700; color: #cc0000; display: block; }
+.stat-label { font-size: 10px; color: #555; }
+.actor-row { display: flex; align-items: flex-start; gap: 8px; padding: 6px 0; border-bottom: 1px solid #ddd; font-size: 12px; }
+.actor-row:last-child { border-bottom: none; }
+.actor-flag { font-size: 18px; flex-shrink: 0; }
+.actor-name { font-weight: 700; font-size: 12px; }
+.actor-role { color: #666; font-size: 11px; }
+.actor-status { margin-left: auto; font-family: 'IBM Plex Mono', monospace; font-size: 9px; padding: 1px 5px; border: 1px solid; white-space: nowrap; flex-shrink: 0; }
+.status-red { color: #cc0000; border-color: #cc0000; }
+.status-yellow { color: #886600; border-color: #886600; }
+.reaccion { border-left: 3px solid #c8c3b5; padding: 6px 10px; margin-bottom: 8px; font-size: 12px; background: #f5f2eb; }
+.reaccion .quien { font-weight: 700; font-size: 11px; font-family: 'IBM Plex Mono', monospace; margin-bottom: 3px; text-transform: uppercase; letter-spacing: 0.05em; }
+.reaccion.niega { border-left-color: #666; }
+.reaccion.apoya { border-left-color: #cc0000; }
+.ticker-bar { background: #cc0000; color: #fff; overflow: hidden; padding: 4px 0; white-space: nowrap; }
+.ticker-inner { display: inline-block; font-family: 'IBM Plex Mono', monospace; font-size: 11px; animation: scroll-ticker 55s linear infinite; }
+@keyframes scroll-ticker { 0% { transform: translateX(100vw); } 100% { transform: translateX(-100%); } }
+.tag-inline { display: inline-block; background: #cc0000; color: #fff; font-family: 'IBM Plex Mono', monospace; font-size: 9px; text-transform: uppercase; padding: 1px 5px; letter-spacing: 0.05em; margin-right: 4px; vertical-align: middle; }
+hr.divider { border: none; border-top: 1px solid #b0aa9f; margin: 10px 0; }
+footer { background: #1a1a1a; color: #888; padding: 14px 16px; font-family: 'IBM Plex Mono', monospace; font-size: 10px; text-align: center; margin-top: 20px; }
+footer a { color: #aaa; }
+@media (max-width: 780px) { .main-wrap { grid-template-columns: 1fr; } .sidebar-col { border-top: 2px solid #c8c3b5; } .topbar { font-size: 10px; } }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <span>HONDURASGATE.INFO — Seguimiento periodístico · Mayo 2026</span>
+  <span>⚠ AFP: autenticidad NO verificada de forma independiente | JOH niega ser la voz</span>
+</div>
+
+<header class="site-header">
+  <h1>HONDUR<span>AS</span>GATE</h1>
+  <div class="subtitle">37 audios filtrados · Red de injerencia transnacional · Honduras, EE.UU., Israel, Argentina · Abril–Mayo 2026</div>
+</header>
+
+<nav class="nav-tabs">
+  <a href="#resumen" class="active">Resumen</a>
+  <a href="#actores">Actores</a>
+  <a href="#timeline">Cronología</a>
+  <a href="#audios">Audios</a>
+  <a href="#trama">La trama</a>
+  <a href="#reacciones">Reacciones</a>
+  <a href="#fuentes">Fuentes</a>
+</nav>
+
+<div class="ticker-bar">
+  <span class="ticker-inner">◆ JOH niega ser la voz: "Claramente no es mi voz" ◆ Zambrano (Congreso HN): "burda fabricación con acento colombiano o nicaragüense" ◆ Petro: "El dinero sale de la cocaína y de Israel" ◆ Sheinbaum: operación parte de "estrategia de la derecha internacional" ◆ AFP: no pudo verificar de forma independiente la autenticidad ◆ 39,618 ciberataques al portal en 24 horas ◆ Continental Strategy (cercana a Rubio): lobbyista de ZEDES y COHEP ◆ Congreso hondureño aprueba enviar audios a peritaje ◆ Asfura viaja a EE.UU. y Costa Rica sin pronunciarse ◆ Argentina: sin declaraciones oficiales ◆</span>
+</div>
+
+<div class="main-wrap">
+<main class="content-col">
+
+  <div class="alert" style="margin-top:10px;" id="dudas">
+    <span class="alert-label">⚠ Nota editorial — leer antes de continuar</span>
+    Los audios fueron publicados por <strong>Canal Red / Diario Red</strong> (proyecto de Pablo Iglesias, exlíder de Podemos, España) y el portal anónimo <strong>hondurasgate.ch</strong>. La verificación forense la ejecutaron los propios medios con <strong>Phonexia Voice Inspector</strong>. <strong>AFP declaró que no pudo verificar la autenticidad de forma independiente.</strong> JOH, Zambrano y otros implicados niegan ser las voces. Ningún gobierno de EE.UU., Israel o Argentina ha confirmado nada. En 2026, clonar una voz con IA cuesta "tres minutos en una interfaz web" (según el propio portal). El Congreso hondureño aprobó enviar los audios a peritaje oficial — resultados pendientes.
+  </div>
+
+  <div id="resumen"></div>
+  <div class="section-header"><span class="num">01</span> RESUMEN DEL CASO</div>
+
+  <div class="lead-headline">El narco-presidente indultado por Trump y la red que —según audios filtrados— quería silenciar a México y Colombia desde EE.UU.</div>
+  <p class="byline">Fuentes: hondurasgate.ch · Canal Red · Diario Red · France 24 · EFE · Democracy Now! · Euronews · El Espectador · BioBioChile · Misión Verdad · LatinAmerican Post</p>
+
+  <div class="body">
+    <p><span class="tag-inline">contexto</span> Juan Orlando Hernández (JOH) fue presidente de Honduras entre 2014 y 2022. En junio de 2024, un tribunal federal de Nueva York lo condenó a <strong>45 años de prisión</strong> por conspiración para importar cocaína y delitos con armas. La fiscalía probó que usó el aparato estatal para proteger más de <strong>400 toneladas de cocaína</strong> hacia EE.UU. Según la acusación, recibió un millón de dólares del Chapo Guzmán. Su hermano Juan Antonio cumple cadena perpetua por los mismos delitos.</p>
+
+    <p><span class="tag-inline">detonante</span> El <strong>30 de noviembre de 2025</strong> —dos días antes de las elecciones hondureñas— Trump anunció el indulto de JOH. Hernández quedó libre el 1 de diciembre. Dias después, el candidato de su mismo partido <strong>Nasry "Tito" Asfura</strong> ganó las elecciones, con respaldo público de Trump.</p>
+
+    <p><span class="tag-inline">la filtración</span> Entre el <strong>29 de abril y el 8 de mayo de 2026</strong>, el portal hondurasgate.ch junto con Canal Red y Diario Red publicaron <strong>37 audios</strong> de conversaciones supuestamente grabadas en WhatsApp, Signal y Telegram entre enero y abril de 2026. La voz principal es atribuida a JOH operando desde suelo estadounidense tras el indulto.</p>
+
+    <p>Lo que revelan los audios, si son auténticos: (1) el indulto de Trump fue negociado y financiado con dinero israelí; (2) JOH organiza una "célula mediática" clandestina desde EE.UU. para atacar a los gobiernos de México y Colombia con desinformación, con $350K de Milei; (3) a cambio, Honduras cede soberanía (ZEDES, base militar, canal interoceánico, ley de IA a medida de empresas de EE.UU. e Israel); (4) se amenaza con violencia a funcionarios electorales que no cooperen.</p>
+
+    <p><span class="tag-inline">escala</span> Democracy Now! lo catalogó como un plan para "desestabilizar los gobiernos de izquierda de Brasil, Colombia y México". El Espectador lo conecta con las presidenciales colombianas de 2026. Tras la publicación, el portal hondurasgate.ch reportó <strong>39,618 intentos de ataque digital en un solo día</strong>, con vectores telemetrizados apuntando principalmente a EE.UU. e Israel.</p>
+  </div>
+
+  <div id="actores"></div>
+  <div class="section-header"><span class="num">02</span> ACTORES IMPLICADOS</div>
+  <table>
+    <thead><tr><th>Actor</th><th>País / Cargo</th><th>Rol según los audios</th><th>Reacción</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Juan Orlando Hernández (JOH)</strong></td><td>🇭🇳 Expresidente, condenado por narcotráfico</td><td>Voz principal. Coordina la operación desde EE.UU. Solicita fondos, organiza la célula mediática, transmite instrucciones sobre violencia y lawfare.</td><td>Niega: "Claramente no es mi voz"</td></tr>
+      <tr><td><strong>Nasry "Tito" Asfura</strong></td><td>🇭🇳 Presidente actual (desde dic. 2025)</td><td>Interlocutor de JOH. Acepta transferirle fondos "de la cuenta de un amigo". Comprometería recursos del INSEP. Negocia las ZEDES y base militar con inversores.</td><td>Sin declaraciones. Viajó a EE.UU. y Costa Rica sin pronunciarse.</td></tr>
+      <tr><td><strong>María Antonieta Mejía</strong></td><td>🇭🇳 Vicepresidenta de Honduras</td><td>Confirma a JOH que gestionará $300K USD. Pide "omitir los detalles" de la conversación.</td><td>Sin declaraciones</td></tr>
+      <tr><td><strong>Tomás Zambrano</strong></td><td>🇭🇳 Presidente del Congreso Nacional</td><td>JOH le transmite instrucciones sobre uso de violencia para "controlar el país". Una voz le es atribuida en los audios.</td><td>Niega: "burda fabricación con acento colombiano o nicaragüense"</td></tr>
+      <tr><td><strong>Romeo Vásquez Velásquez</strong></td><td>🇭🇳 General (dirigió golpe de Estado de 2009)</td><td>Supuestamente coordina con las FFAA para "empezar la cacería" de opositores.</td><td>Sin declaraciones</td></tr>
+      <tr><td><strong>Donald Trump</strong></td><td>🇺🇸 Presidente de EE.UU.</td><td>Firmó el indulto. Según los audios, miembros de "su equipo" participan en la operación mediática.</td><td>Sin declaraciones sobre el escándalo</td></tr>
+      <tr><td><strong>Marco Rubio</strong></td><td>🇺🇸 Secretario de Estado</td><td>No mencionado directamente en audios, pero su firma cercana Continental Strategy lobbea por Honduras Próspera y el COHEP. Elogió a JOH en 2018.</td><td>Sin declaraciones</td></tr>
+      <tr><td><strong>Roger Stone</strong></td><td>🇺🇸 Operador político trumpista</td><td>Descrito como "lobbista clave" en el entorno Trump para la gestión del indulto de JOH.</td><td>Sin declaraciones</td></tr>
+      <tr><td><strong>Benjamin Netanyahu</strong></td><td>🇮🇱 Primer Ministro de Israel</td><td>JOH dice en audios: "tuvieron todo que ver ellos con mi salida y negociación". El dinero del indulto supuestamente "salió de una junta de rabinos" vinculada al gobierno israelí.</td><td>Sin declaraciones</td></tr>
+      <tr><td><strong>Javier Milei</strong></td><td>🇦🇷 Presidente de Argentina</td><td>JOH afirma: "Javier Milei está apoyando con 350 mil dólares también" para la operación de desinformación.</td><td>Sin declaraciones. Gobierno argentino en silencio oficial.</td></tr>
+      <tr><td><strong>Carlos Trujillo / Continental Strategy</strong></td><td>🇺🇸 Exembajador EE.UU. en OEA / lobby</td><td>Representa a Honduras Próspera (ZEDES), COHEP y Ficohsa en el Congreso y Departamento de Estado. Cobró al menos $109K entre 2025-26.</td><td>Increpado por el congresista demócrata Joaquín Castro por "sesgo de intereses".</td></tr>
+      <tr><td><strong>Marlon Ochoa</strong></td><td>🇭🇳 Exconsejer electoral del CNE</td><td>Denunció amenazas de "cárcel o muerte". Entregó archivos al Ministerio Público hondureño. Fue removido de su cargo.</td><td>Denunció ante la CIDH plan para atentar contra su vida.</td></tr>
+    </tbody>
+  </table>
+
+  <div id="timeline"></div>
+  <div class="section-header"><span class="num">03</span> CRONOLOGÍA</div>
+  <div class="tl">
+    <div class="tl-item"><p class="tl-date">2014–2022</p><p class="tl-event">JOH en la presidencia de Honduras</p><p class="tl-detail">Según la fiscalía de NY, usa el aparato estatal para proteger el tráfico de cocaína. Recibe sobornos del Chapo Guzmán. Su hermano Juan Antonio es detenido y luego condenado a cadena perpetua.</p></div>
+    <div class="tl-item"><p class="tl-date">Junio 2024</p><p class="tl-event">Condena en Manhattan: 45 años</p><p class="tl-detail">Tribunal federal de NY lo declara culpable de conspiración para traficar narcóticos, uso de armas y conspiración para tráfico de armas. Queda recluido en EE.UU.</p></div>
+    <div class="tl-item"><p class="tl-date">Julio 2025</p><p class="tl-event">Primeros audios sobre el proceso electoral hondureño</p><p class="tl-detail">Circula en redes un audio de 25 segundos atribuido a la consejera electoral Cosette López hablando del sistema TREP. El Heraldo señala "indicios de manipulación con IA". La solicitud de peritaje es rechazada por la Corte Suprema.</p></div>
+    <div class="tl-item key"><p class="tl-date">30 noviembre 2025</p><p class="tl-event">⚡ Trump indulta a JOH — 2 días antes de elecciones</p><p class="tl-detail">Anuncio sorpresivo. JOH libre el 1 de diciembre. El timing —72 horas antes de los comicios— genera alarma internacional.</p></div>
+    <div class="tl-item"><p class="tl-date">Diciembre 2025</p><p class="tl-event">Elecciones hondureñas — Asfura gana</p><p class="tl-detail">Nasry Asfura, del mismo Partido Nacional y con respaldo de Trump, gana la presidencia. El Ministerio Público difunde tres audios donde una voz similar a JOH da instrucciones para declararlo ganador. Llegan por Twitter a las autoridades.</p></div>
+    <div class="tl-item"><p class="tl-date">Enero–abril 2026</p><p class="tl-event">Las conversaciones grabadas (según la investigación)</p><p class="tl-detail">JOH, libre y en suelo estadounidense, mantiene conversaciones por WhatsApp, Signal y Telegram con Asfura, Mejía, Zambrano, Vásquez Velásquez y otros. Estas serán los 37 audios.</p></div>
+    <div class="tl-item"><p class="tl-date">29 abril 2026</p><p class="tl-event">Primera entrega pública de audios</p><p class="tl-detail">hondurasgate.ch y Canal Red publican los primeros audios. La frase que lo define: "Vamos a montar una célula, presidente, desde aquí, desde EE.UU., para que no nos rastreen allá en Honduras."</p></div>
+    <div class="tl-item"><p class="tl-date">1–6 mayo 2026</p><p class="tl-event">Nuevas entregas: Milei, Netanyahu, ZEDES, violencia</p><p class="tl-detail">Se publican audios sobre financiamiento de Milei ($350K), el rol de Netanyahu en el indulto, los planes de cesión de soberanía y las amenazas al consejero Marlon Ochoa.</p></div>
+    <div class="tl-item"><p class="tl-date">6 mayo 2026</p><p class="tl-event">Congreso hondureño aprueba peritaje oficial</p><p class="tl-detail">Primera respuesta institucional. El MP reabre el caso de lavado Nº 2014-211. La Procuraduría General instala una mesa técnica con veeduría del CNA.</p></div>
+    <div class="tl-item"><p class="tl-date">7 mayo 2026</p><p class="tl-event">France 24, EFE, Democracy Now! cubren internacionalmente</p><p class="tl-detail">AFP declara que no pudo verificar la autenticidad de forma independiente. El escándalo toma dimensión global.</p></div>
+    <div class="tl-item key"><p class="tl-date">8 mayo 2026</p><p class="tl-event">⚡ 39,618 ciberataques al portal en 24 horas</p><p class="tl-detail">hondurasgate.ch publica telemetría de los ataques. Los vectores apuntan principalmente a EE.UU. e Israel. El portal lo llama "represalia directa".</p></div>
+    <div class="tl-item"><p class="tl-date">10 mayo 2026 — hoy</p><p class="tl-event">Estado actual: investigaciones abiertas, gobiernos en silencio</p><p class="tl-detail">Ningún gobierno implicado (EE.UU., Israel, Argentina) ha emitido declaraciones. Peritaje oficial hondureño pendiente. Asfura sigue sin pronunciarse.</p></div>
+  </div>
+
+  <div id="audios"></div>
+  <div class="section-header"><span class="num">04</span> LOS AUDIOS — TRANSCRIPCIONES</div>
+
+  <div class="alert">
+    <span class="alert-label">Protocolo de verificación (según los publicadores)</span>
+    Phonexia Voice Inspector (empresa checa, usada en +60 países). 9 pasos: captura cifrada → decodificación PCM → resampleo 8kHz → recodificación OGG/OPUS → hash SHA-256 → extracción de +25 indicadores acústicos (jitter, shimmer, eventos respiratorios, varianza MFCC, formantes) → veredicto. Umbral: &lt;10% probabilidad IA y &gt;80% confianza = voz humana. Los 37 archivos completos y dossier técnico en <a href="https://hondurasgate.ch" target="_blank">hondurasgate.ch</a>. <strong>No hay verificación independiente por terceros hasta ahora.</strong>
+  </div>
+
+  <div class="audio-card">
+    <div class="audio-header" onclick="toggle(this)">
+      <span class="audio-num">01</span>
+      <div>
+        <div class="audio-title">JOH pide $150K a Asfura para la "célula informativa" desde EE.UU.</div>
+        <div class="audio-meta-line">30 ENE 2026 · WhatsApp · JOH → Nasry Asfura</div>
+      </div>
+      <span class="audio-tag">Célula mediática</span>
+    </div>
+    <div class="audio-body">
+      <div class="transcript">"Necesito por favor que me manden a la cuenta de Rosales unos 150 mil dólares, porque aquí vamos a rentar un apartamento y ahí vamos a montar una oficina para poner una Unidad de periodismo digital. Me lo va a manejar alguien del equipo del Presidente de Estados Unidos. Nos van a montar un sitio de noticias donde van a sacar unos datos importantes sobre Manuel Zelaya y Xiomara Castro."<br><br>Asfura (según transcripción): "A ver si te lo pueden entregar en efectivo, pero explícame, ¿qué vamos a hacer con eso, qué ganamos?"<br><br>JOH: "Vamos a montar una célula, presidente, desde aquí, desde Estados Unidos, informativa, para que no nos rastreen ahí en Honduras."</div>
+      <p class="significance"><strong>Significado:</strong> JOH solicita fondos a la presidencia hondureña para una operación clandestina de medios desde suelo estadounidense. Asfura, según la transcripción, acepta transferir el dinero "desde la cuenta de un amigo" para no dejar rastro. Asfura habría ofrecido también transferencias adicionales desde el INSEP (Instituto de Seguridad Social).</p>
+      <a href="https://hondurasgate.ch" target="_blank" class="audio-link">→ Ver análisis forense completo en hondurasgate.ch</a>
+    </div>
+  </div>
+
+  <div class="audio-card">
+    <div class="audio-header" onclick="toggle(this)">
+      <span class="audio-num">02</span>
+      <div>
+        <div class="audio-title">JOH y Mejía — Milei, $350K y "extirpar el cáncer de la izquierda"</div>
+        <div class="audio-meta-line">30 ENE 2026 · Signal · JOH → Vicepresidenta M.A. Mejía</div>
+      </div>
+      <span class="audio-tag">Financiamiento</span>
+    </div>
+    <div class="audio-body">
+      <div class="transcript">JOH: "Es necesario yo tener esa liquidez porque vamos a montar una oficina aquí. Con el apoyo de algunos republicanos para poder atacar y extirpar el cáncer de la izquierda de ahí de Honduras y de toda Latinoamérica. Le contaba al Presidente Asfura que pudimos hablar con Javier Milei, y él está apoyando con 350 mil dólares también. También otro gran amigo de nosotros de México está apoyando, ya para el tema de los mexicanos. Estamos bastante listos y esperando que esto avance fuerte."<br><br>Mejía: "Presidente, si gusta, omitamos los detalles. Sólo quería confirmar la cantidad. Ya que ya la sé, yo me voy a encargar de toda la gestión, 300 mil dólares entonces."</div>
+      <p class="significance"><strong>Significado:</strong> Vincula directamente a Milei con $350K. La vicepresidenta en funciones pide "omitir los detalles" y confirma gestionar $300K. Hay además mención a "un gran amigo de México" no identificado que también financia la operación. El total documentado en audios supera los $500K según algunas fuentes.</p>
+      <a href="https://hondurasgate.ch" target="_blank" class="audio-link">→ Ver análisis forense completo en hondurasgate.ch</a>
+    </div>
+  </div>
+
+  <div class="audio-card">
+    <div class="audio-header" onclick="toggle(this)">
+      <span class="audio-num">03</span>
+      <div>
+        <div class="audio-title">JOH sobre el indulto: "Una junta de rabinos" y Netanyahu "tuvo todo que ver"</div>
+        <div class="audio-meta-line">Abril 2026 · Telegram · JOH a interlocutor no identificado</div>
+      </div>
+      <span class="audio-tag">Indulto / Israel</span>
+    </div>
+    <div class="audio-body">
+      <div class="transcript">"El dinero del indulto ni siquiera salió de ustedes. Salió de una junta de rabinos y de una gente que apoyaba a Israel. El primer ministro de Israel nos va a dar el apoyo… tuvieron todo que ver ellos con mi salida y negociación."</div>
+      <p class="significance"><strong>Significado:</strong> JOH afirma que Netanyahu tuvo "todo que ver" en la negociación del indulto con Trump. El dinero habría provenido de sectores vinculados al gobierno israelí. Petro citó este audio para afirmar que "el dinero sale de la cocaína y de Israel". No existe confirmación israelí ni estadounidense de ningún tipo. Israel no ha emitido ninguna declaración.</p>
+      <a href="https://hondurasgate.ch" target="_blank" class="audio-link">→ Ver análisis forense completo en hondurasgate.ch</a>
+    </div>
+  </div>
+
+  <div class="audio-card">
+    <div class="audio-header" onclick="toggle(this)">
+      <span class="audio-num">04</span>
+      <div>
+        <div class="audio-title">Asfura a JOH — ZEDES, nueva base tipo Palmerola, canal interoceánico a GE, CECOT en Tegucigalpa</div>
+        <div class="audio-meta-line">10 FEB 2026 · WhatsApp · Nasry Asfura → JOH</div>
+      </div>
+      <span class="audio-tag">Soberanía / concesiones</span>
+    </div>
+    <div class="audio-body">
+      <div class="transcript">"Ya tuvimos una sesión privada con círculos inversionistas y están muy positivos para ver la expansión de la ZEDE en Roatán y en Comayagua, para también Palmerola, vamos a mover otra Palmerola específicamente ahí en Roatán, adonde está Próspera. Los chinos estaban ofertando. Pero nosotros no vamos a ceder. Vamos a ponerle un alto a eso. Y sobre la cárcel CECOT hondureño también se viene, dentro de Tegucigalpa. Ya negociamos una base. También el interoceánico. Se los vamos a entregar a General Electric."</div>
+      <p class="significance"><strong>Significado:</strong> Describe el "pago" prometido a Washington: expansión de ZEDES (zonas donde Honduras cede soberanía jurídica a empresas extranjeras), nueva base militar en Roatán, canal interoceánico a GE, cárcel tipo CECOT en Tegucigalpa, y ley de IA a medida de EE.UU. e Israel. El bloqueo a China es explícito. Las ZEDES habían sido abolidas por la expresidenta Xiomara Castro en 2022.</p>
+      <a href="https://hondurasgate.ch" target="_blank" class="audio-link">→ Ver análisis forense completo en hondurasgate.ch</a>
+    </div>
+  </div>
+
+  <div class="audio-card">
+    <div class="audio-header" onclick="toggle(this)">
+      <span class="audio-num">05</span>
+      <div>
+        <div class="audio-title">JOH a Zambrano — "Si hay que matar a la gente, se va a hacer"</div>
+        <div class="audio-meta-line">18 MAR 2026 · Signal · JOH → Tomás Zambrano (Presidente del Congreso)</div>
+      </div>
+      <span class="audio-tag">Violencia / amenazas</span>
+    </div>
+    <div class="audio-body">
+      <div class="transcript">"Si hay que matar a la gente, para nosotros poder estar tranquilos, se va a hacer. Si hay que regresar a la represión para controlar al país, se va a hacer."</div>
+      <p class="significance"><strong>Significado:</strong> Audio que provocó mayor alarma. JOH supuestamente invoca la figura de Pablo Escobar como referencia. El general Romeo Vásquez Velásquez —quien ejecutó el golpe contra Zelaya en 2009— supuestamente coordina con las FFAA para "empezar la cacería". El consejero electoral Marlon Ochoa, que entregó los archivos al MP, denunció ante la CIDH amenazas de "cárcel o muerte" y fue posteriormente removido de su cargo mediante juicio político.</p>
+      <a href="https://hondurasgate.ch" target="_blank" class="audio-link">→ Ver análisis forense completo en hondurasgate.ch</a>
+    </div>
+  </div>
+
+  <div class="audio-card">
+    <div class="audio-header" onclick="toggle(this)">
+      <span class="audio-num">06</span>
+      <div>
+        <div class="audio-title">JOH — "Expedientes" contra México, Colombia y la familia Zelaya</div>
+        <div class="audio-meta-line">Enero 2026 · WhatsApp · JOH a interlocutor</div>
+      </div>
+      <span class="audio-tag">Desinformación</span>
+    </div>
+    <div class="audio-body">
+      <div class="transcript">"Va a ser como un sitio de noticias latinoamericanas. Estuve en una llamada con el presidente Javier Milei y fue exitosa. Muy, muy, muy buena, y yo creo que en este punto podemos hacer cosas grandes para toda Latinoamérica. Se vienen unos expedientes contra México, se vienen unos expedientes contra Colombia y, lo más importante, contra Honduras, contra la familia Zelaya."</div>
+      <p class="significance"><strong>Significado:</strong> Describe la operación como un "sitio de noticias latinoamericanas" con alcance continental. Los "expedientes" serían material de ataque contra Sheinbaum (México), Petro (Colombia) y la familia Zelaya en Honduras. El sitio operaría desde EE.UU. para no ser rastreado. En la misma conversación menciona que también hay "un gran amigo de México" que financia la operación, no identificado.</p>
+      <a href="https://hondurasgate.ch" target="_blank" class="audio-link">→ Ver análisis forense completo en hondurasgate.ch</a>
+    </div>
+  </div>
+
+  <p style="font-size:12px; color:#666; margin-top:8px; margin-bottom:14px;">Los 37 audios completos con análisis forense interactivo, hashes SHA-256 verificables y dossier PDF están en <a href="https://hondurasgate.ch" target="_blank">hondurasgate.ch</a>.</p>
+
+  <div id="trama"></div>
+  <div class="section-header"><span class="num">05</span> LA TRAMA — MAPA DE PODER</div>
+
+  <div class="body">
+    <h3>¿Qué es Continental Strategy?</h3>
+    <p>Firma de lobby dirigida por <strong>Carlos Trujillo</strong> (exembajador de EE.UU. ante la OEA, cercano a Marco Rubio). Aparece en registros oficiales representando a <strong>Honduras Próspera</strong> (las ZEDES), el <strong>COHEP</strong> (70 instituciones empresariales) y el <strong>Grupo Financiero Ficohsa</strong>. Entre 2025 y 2026 cobró al menos $109,000 USD para hacer lobby en el Senado, la Cámara y el Departamento de Estado. El congresista demócrata Joaquín Castro la increpó en audiencias por "sesgo de intereses". Diario Red la señala como la pieza del lobby empresarial detrás del Hondurasgate.</p>
+
+    <h3>El rol de Marco Rubio (contextual)</h3>
+    <p>No aparece en los audios, pero el análisis de Misión Verdad lo señala como "pivote de la arquitectura de dominación hemisférica". Elogió públicamente a JOH en 2018 por "combatir el narcotráfico" —7 meses antes de que el hermano de JOH fuera imputado por traficar 158 toneladas de cocaína. Ha promovido líderes latinoamericanos cuestionados (JOH, Noboa, Milei) bajo la retórica del "narcoterrorismo".</p>
+
+    <h3>La dimensión anti-China</h3>
+    <p>Varios audios tienen una dimensión explícita de confrontación con China. Asfura dice: "los chinos estaban ofertando, pero nosotros no vamos a ceder." La ley de IA que Honduras promulgaría favorecería a empresas de EE.UU. e Israel, no a competidoras chinas. Investigadores vinculan esto con la "Estrategia de Seguridad Nacional" de Trump 2025 y su "Escudo de las Américas".</p>
+
+    <h3>¿Quién filtró y por qué? (hipótesis no confirmadas)</h3>
+    <p>Las fuentes son completamente anónimas. Las hipótesis en circulación: (a) fuentes dentro de la inteligencia estadounidense disconformes con la alianza con JOH; (b) la rivalidad interna entre Rubio y JD Vance por el liderazgo republicano de 2028 genera filtraciones que debilitan al rival; (c) sectores afines al gobierno de Xiomara Castro (derrotado por Asfura). Ninguna es verificable.</p>
+  </div>
+
+  <table>
+    <thead><tr><th>Qué ofrece Honduras a Washington (según audios)</th><th>Qué obtiene Honduras a cambio (según audios)</th></tr></thead>
+    <tbody>
+      <tr><td>Expansión de ZEDES en Roatán y Comayagua (cesión de soberanía jurídica)</td><td>Indulto de JOH, supuestamente financiado por Israel</td></tr>
+      <tr><td>Nueva base militar tipo Palmerola en Roatán</td><td>Apoyo político para retorno de JOH a la presidencia</td></tr>
+      <tr><td>Canal interoceánico entregado a General Electric</td><td>$350K de Milei + recursos republicanos para célula mediática</td></tr>
+      <tr><td>Ley de IA favorable a empresas de EE.UU. e Israel</td><td>Protección política regional y respaldo del Partido Republicano</td></tr>
+      <tr><td>Centro de confinamiento tipo CECOT en Tegucigalpa</td><td>Bloqueo de influencia china en Honduras</td></tr>
+    </tbody>
+  </table>
+
+  <div id="reacciones"></div>
+  <div class="section-header"><span class="num">06</span> REACCIONES OFICIALES</div>
+
+  <div class="reaccion apoya">
+    <div class="quien">🇨🇴 Gustavo Petro — Presidente de Colombia</div>
+    "Así se mueven las redes de la extrema derecha comunicacional. El dinero sale de la cocaína y de Israel." En X, al conocerse los audios. También cuestionó por qué Netanyahu "pagaría por liberar a un gran narcotraficante."
+  </div>
+  <div class="reaccion apoya">
+    <div class="quien">🇲🇽 Claudia Sheinbaum — Presidenta de México</div>
+    Dijo que la operación forma parte de una estrategia de la "derecha internacional" para difundir información falsa. "Podrán montar una oficina de campañas sucias contra nuestro Gobierno en Honduras, con recursos de un pueblo amigo. No va a haber mella, no va a haber."
+  </div>
+  <div class="reaccion niega">
+    <div class="quien">🇭🇳 Juan Orlando Hernández — Expresidente</div>
+    "Claramente no es mi voz." Publicado en X. No ha dado entrevistas ni presentado peritaje alternativo.
+  </div>
+  <div class="reaccion niega">
+    <div class="quien">🇭🇳 Tomás Zambrano — Presidente del Congreso Nacional</div>
+    "No había querido referirme oficialmente al tema de los audios falsos que viene divulgando la conexión de la izquierda internacional. Para todos los hondureños que durante años nos han escuchado en entrevistas, foros y discursos, resulta evidente que esas voces no son las nuestras." Añadió: "Algunas voces incluso fueron fabricadas con acento colombiano o nicaragüense. La burda fabricación de esta campaña es tan evidente que llega a ser cómica."
+  </div>
+  <div class="reaccion niega">
+    <div class="quien">🇭🇳 Nasry Asfura — Presidente de Honduras</div>
+    <em>Sin declaraciones públicas.</em> Viajó a EE.UU. para reunirse con empresarios y a Costa Rica para la toma de posesión de Laura Fernández sin referirse al escándalo.
+  </div>
+  <div class="reaccion niega">
+    <div class="quien">🇭🇳 Canciller Mireya Agüero — Honduras</div>
+    Postura de cautela. Reafirmó que Honduras basa sus relaciones internacionales en "el respeto a la soberanía de los pueblos".
+  </div>
+  <div class="reaccion niega">
+    <div class="quien">🇭🇳 Min. Seguridad Gerzon Velásquez — Honduras</div>
+    Enfatizó que las fuerzas de seguridad (incluyendo TIGRES COE) "se concentran exclusivamente en la lucha contra el narcotráfico y la seguridad ciudadana, desmarcándose de agendas políticas regionales."
+  </div>
+  <div class="reaccion" style="border-left-color:#003399">
+    <div class="quien">🌐 AFP — Agence France-Presse</div>
+    Declaró que no ha podido verificar de manera independiente la autenticidad total de los audios.
+  </div>
+  <div class="reaccion" style="border-left-color:#555">
+    <div class="quien">🇺🇸 EE.UU. / 🇮🇱 Israel / 🇦🇷 Argentina</div>
+    <em>Sin declaraciones oficiales</em> de ninguno de los tres gobiernos mencionados en los audios.
+  </div>
+
+  <div id="fuentes"></div>
+  <div class="section-header"><span class="num">07</span> FUENTES</div>
+  <table>
+    <thead><tr><th>Fuente</th><th>Tipo</th><th>Enlace</th></tr></thead>
+    <tbody>
+      <tr><td>hondurasgate.ch</td><td>Fuente primaria — 37 audios + análisis forense</td><td><a href="https://hondurasgate.ch" target="_blank">hondurasgate.ch</a></td></tr>
+      <tr><td>Diario Red / Canal Red América Latina</td><td>Medio publicador principal (Pablo Iglesias / Podemos)</td><td><a href="https://www.diario-red.com" target="_blank">diario-red.com</a></td></tr>
+      <tr><td>France 24 (español)</td><td>Cobertura internacional</td><td><a href="https://www.france24.com/es/am%C3%A9rica-latina/20260507-hondurasgate-abc" target="_blank">france24.com</a></td></tr>
+      <tr><td>Democracy Now! (español)</td><td>Medio independiente progresista EE.UU.</td><td><a href="https://www.democracynow.org/es" target="_blank">democracynow.org</a></td></tr>
+      <tr><td>El Espectador (Colombia)</td><td>Medio de referencia colombiano</td><td><a href="https://www.elespectador.com" target="_blank">elespectador.com</a></td></tr>
+      <tr><td>EFE (vía Eje21 / BioBioChile)</td><td>Agencia internacional</td><td><a href="https://www.eje21.com.co/2026/05/investigacion-revela-posible-plan-de-eeuu-israel-y-honduras-contra-gobiernos-progresistas/" target="_blank">eje21.com.co</a></td></tr>
+      <tr><td>Misión Verdad</td><td>Análisis geopolítico (orientación chavista)</td><td><a href="https://misionverdad.com" target="_blank">misionverdad.com</a></td></tr>
+      <tr><td>LatinAmerican Post</td><td>Medio regional</td><td><a href="https://latinamericanpost.com" target="_blank">latinamericanpost.com</a></td></tr>
+      <tr><td>Maya TV Honduras</td><td>Medio hondureño local</td><td><a href="https://www.mayatv.hn" target="_blank">mayatv.hn</a></td></tr>
+    </tbody>
+  </table>
+
+</main>
+
+<aside class="sidebar-col">
+
+  <div class="sb-box">
+    <div class="sb-box-title">CIFRAS CLAVE</div>
+    <div class="sb-box-content">
+      <div class="stat-grid">
+        <div class="stat-item"><span class="stat-num">37</span><span class="stat-label">audios filtrados</span></div>
+        <div class="stat-item"><span class="stat-num">45</span><span class="stat-label">años de condena indultados</span></div>
+        <div class="stat-item"><span class="stat-num">400+</span><span class="stat-label">ton. cocaína (fiscalía NY)</span></div>
+        <div class="stat-item"><span class="stat-num">$350K</span><span class="stat-label">Milei (según JOH)</span></div>
+        <div class="stat-item"><span class="stat-num">$150K</span><span class="stat-label">pedidos a Asfura</span></div>
+        <div class="stat-item"><span class="stat-num">$300K</span><span class="stat-label">prometidos por Mejía</span></div>
+        <div class="stat-item"><span class="stat-num">39K</span><span class="stat-label">ataques en 24h al portal</span></div>
+        <div class="stat-item"><span class="stat-num">60+</span><span class="stat-label">países usan Phonexia</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sb-box">
+    <div class="sb-box-title">ACTORES — ESTADO ACTUAL</div>
+    <div class="sb-box-content">
+      <div class="actor-row"><span class="actor-flag">🇭🇳</span><div><div class="actor-name">Juan Orlando Hernández</div><div class="actor-role">Expresidente / narco-condenado / indultado</div></div><span class="actor-status status-red">NIEGA</span></div>
+      <div class="actor-row"><span class="actor-flag">🇭🇳</span><div><div class="actor-name">Nasry Asfura</div><div class="actor-role">Presidente actual de Honduras</div></div><span class="actor-status status-yellow">SILENCIO</span></div>
+      <div class="actor-row"><span class="actor-flag">🇭🇳</span><div><div class="actor-name">Tomás Zambrano</div><div class="actor-role">Congreso Nacional</div></div><span class="actor-status status-red">NIEGA</span></div>
+      <div class="actor-row"><span class="actor-flag">🇺🇸</span><div><div class="actor-name">Donald Trump</div><div class="actor-role">Presidente EE.UU.</div></div><span class="actor-status status-yellow">SILENCIO</span></div>
+      <div class="actor-row"><span class="actor-flag">🇮🇱</span><div><div class="actor-name">Benjamin Netanyahu</div><div class="actor-role">PM Israel</div></div><span class="actor-status status-yellow">SILENCIO</span></div>
+      <div class="actor-row"><span class="actor-flag">🇦🇷</span><div><div class="actor-name">Javier Milei</div><div class="actor-role">Presidente Argentina</div></div><span class="actor-status status-yellow">SILENCIO</span></div>
+      <div class="actor-row"><span class="actor-flag">🇺🇸</span><div><div class="actor-name">Marco Rubio</div><div class="actor-role">Secretario de Estado EE.UU.</div></div><span class="actor-status status-yellow">SILENCIO</span></div>
+    </div>
+  </div>
+
+  <div class="sb-box">
+    <div class="sb-box-title">MEDIOS PUBLICADORES</div>
+    <div class="sb-box-content">
+      <p><strong>hondurasgate.ch</strong> — Portal anónimo con sede en Suiza. "Periodistas hondureños que por razones de seguridad permanecerán anónimos."</p>
+      <p><strong>Canal Red / Diario Red</strong> — Proyecto de Pablo Iglesias (exlíder de Podemos, izquierda española). Orientación ideológica clara.</p>
+      <p><strong>Democracy Now!</strong> — Medio independiente progresista de EE.UU.</p>
+      <p><strong>AFP</strong> — No verificó autenticidad de forma independiente.</p>
+      <hr class="divider">
+      <p style="font-size:11px; color:#666;">Los grandes medios latinoamericanos corporativos no lo han cubierto significativamente. Dos lecturas posibles: (a) prudencia ante falta de verificación independiente, o (b) silencio deliberado.</p>
+    </div>
+  </div>
+
+  <div class="sb-box">
+    <div class="sb-box-title">¿QUÉ SON LAS ZEDES?</div>
+    <div class="sb-box-content">
+      <p>Las <strong>Zonas de Empleo y Desarrollo Económico</strong> son áreas del territorio hondureño donde el Estado cede soberanía jurídica, creando marcos legales excepcionales favorables a empresas extranjeras. También llamadas "Ciudades Modelo".</p>
+      <p>La presidenta Xiomara Castro las abolió en 2022 como inconstitucionales. Los audios sugieren que Asfura las restablecería como "pago" al apoyo de Washington.</p>
+      <p><strong>Honduras Próspera</strong> (Roatán) es una de estas ciudades-empresa. Es cliente de Continental Strategy, la firma lobbyista cercana a Rubio.</p>
+    </div>
+  </div>
+
+  <div class="sb-box">
+    <div class="sb-box-title">COMPARACIONES HISTÓRICAS</div>
+    <div class="sb-box-content">
+      <p>🔹 <strong>Watergate (1972)</strong> — Por la dimensión y el papel de las filtraciones.</p>
+      <p>🔹 <strong>Operación Cóndor (1970-80)</strong> — Coordinación transnacional para eliminar la izquierda latinoamericana con apoyo de EE.UU. El Diario Co Latino habla de "Plan Cóndor 2.0".</p>
+      <p>🔹 <strong>Iran-Contra</strong> — Operaciones encubiertas Reagan-Bush en Centroamérica, con Honduras como eje principal.</p>
+    </div>
+  </div>
+
+  <div class="sb-box">
+    <div class="sb-box-title" style="background:#cc0000;">⚠ ADVERTENCIAS CLAVE</div>
+    <div class="sb-box-content">
+      <p>1. <strong>AFP no verificó</strong> la autenticidad de forma independiente.</p>
+      <p>2. Los publicadores tienen <strong>sesgo ideológico de izquierda</strong> documentado y claro.</p>
+      <p>3. Las fuentes son <strong>completamente anónimas</strong>. No hay cadena de custodia física verificable.</p>
+      <p>4. En 2026 clonar una voz con IA cuesta <strong>"tres minutos"</strong> (según el propio portal).</p>
+      <p>5. <strong>Ningún gobierno implicado</strong> ha confirmado nada oficialmente.</p>
+      <p>6. El peritaje oficial del Congreso hondureño está <strong>pendiente</strong>.</p>
+      <p>7. El caso fue comparado con Watergate pero <strong>no existe investigación judicial</strong> de ningún gobierno implicado.</p>
+    </div>
+  </div>
+
+  <div class="sb-box">
+    <div class="sb-box-title">FUENTES PRIMARIAS</div>
+    <div class="sb-box-content">
+      <p>🔗 <a href="https://hondurasgate.ch" target="_blank">hondurasgate.ch</a> — 37 audios + forense</p>
+      <p>🔗 <a href="https://www.diario-red.com" target="_blank">diario-red.com</a> — Diario Red / Canal Red</p>
+      <p>🔗 <a href="https://www.france24.com/es/am%C3%A9rica-latina/20260507-hondurasgate-abc" target="_blank">France 24 (es)</a></p>
+      <p>🔗 <a href="https://www.democracynow.org/es/2026/5/8/titulares/us_and_israel_worked_with_disgraced_ex_president_of_honduras_to_destabilize_leftist_governments" target="_blank">Democracy Now!</a></p>
+      <p>🔗 <a href="https://www.elespectador.com/mundo/america/hondurasgate-el-supuesto-intento-de-ee-uu-y-socios-por-desestabilizar-a-petro-y-sheinbaum/" target="_blank">El Espectador</a></p>
+    </div>
+  </div>
+
+</aside>
+</div>
+
+<footer>
+  <p>HONDURASGATE.INFO — Compilación periodística · 10 mayo 2026</p>
+  <p>Síntesis informativa sin posición editorial propia. Fuente primaria: <a href="https://hondurasgate.ch" target="_blank">hondurasgate.ch</a> | Verificación independiente: pendiente.</p>
+</footer>
+
+<script>
+function toggle(header) {
+  var body = header.nextElementSibling;
+  var all = document.querySelectorAll('.audio-body');
+  all.forEach(function(b) { if(b !== body) b.classList.remove('open'); });
+  body.classList.toggle('open');
+}
+document.querySelectorAll('.nav-tabs a').forEach(function(a) {
+  a.addEventListener('click', function() {
+    document.querySelectorAll('.nav-tabs a').forEach(function(x){ x.classList.remove('active'); });
+    this.classList.add('active');
+  });
+});
+</script>
+</body>
+</html>

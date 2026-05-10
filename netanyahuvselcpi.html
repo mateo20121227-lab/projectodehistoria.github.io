@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CPI vs Netanyahu — Orden de Arresto Internacional</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=IBM+Plex+Mono:wght@300;400;500&family=Source+Serif+4:ital,wght@0,300;0,400;0,600;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #0a0a0a;
+    --paper: #f5f0e8;
+    --red: #c0392b;
+    --red-dark: #922b21;
+    --gold: #b8960c;
+    --gray-light: #e8e3d8;
+    --gray-mid: #9a9080;
+    --gray-dark: #4a4540;
+    --rule: 1px solid var(--ink);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'Source Serif 4', Georgia, serif;
+    overflow-x: hidden;
+  }
+
+  /* ─── NOISE TEXTURE ─── */
+  body::before {
+    content: '';
+    position: fixed; inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none; z-index: 0; opacity: .5;
+  }
+
+  /* ─── MASTHEAD ─── */
+  .masthead {
+    border-bottom: 3px double var(--ink);
+    padding: 12px 40px 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: var(--paper);
+    position: relative;
+  }
+  .masthead-date {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    letter-spacing: .12em;
+    color: var(--gray-dark);
+    text-transform: uppercase;
+  }
+  .masthead-title {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 13px;
+    letter-spacing: .3em;
+    text-transform: uppercase;
+    color: var(--gray-dark);
+    text-align: center;
+  }
+  .masthead-tag {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    letter-spacing: .12em;
+    color: var(--red);
+    text-transform: uppercase;
+    text-align: right;
+  }
+
+  /* ─── TOP RULE ─── */
+  .rule-block {
+    display: flex; align-items: center; gap: 8px;
+    padding: 6px 40px;
+    border-bottom: var(--rule);
+  }
+  .rule-block span {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 9px; letter-spacing: .2em;
+    text-transform: uppercase; color: var(--gray-mid);
+    white-space: nowrap;
+  }
+  .rule-line { flex: 1; height: 1px; background: var(--gray-mid); }
+
+  /* ─── HERO SECTION ─── */
+  .hero {
+    padding: 48px 40px 0;
+    display: grid;
+    grid-template-columns: 1fr 320px;
+    gap: 40px;
+    border-bottom: var(--rule);
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  .hero-main {}
+  .kicker {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px; letter-spacing: .25em;
+    text-transform: uppercase;
+    color: var(--red);
+    margin-bottom: 16px;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .kicker::before {
+    content: ''; display: inline-block;
+    width: 28px; height: 2px; background: var(--red);
+  }
+  h1 {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: clamp(36px, 5vw, 64px);
+    font-weight: 900;
+    line-height: 1.05;
+    letter-spacing: -.02em;
+    margin-bottom: 20px;
+    max-width: 700px;
+  }
+  h1 em {
+    font-style: italic;
+    color: var(--red);
+  }
+  .hero-deck {
+    font-size: 18px;
+    line-height: 1.6;
+    color: var(--gray-dark);
+    font-weight: 300;
+    max-width: 620px;
+    margin-bottom: 28px;
+    border-left: 3px solid var(--ink);
+    padding-left: 18px;
+  }
+  .byline {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px; letter-spacing: .15em;
+    text-transform: uppercase;
+    color: var(--gray-mid);
+    padding-bottom: 32px;
+    border-bottom: var(--rule);
+    margin-bottom: 0;
+  }
+
+  /* ─── SIDEBAR ─── */
+  .hero-sidebar {
+    border-left: var(--rule);
+    padding-left: 32px;
+    padding-bottom: 32px;
+  }
+  .sidebar-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 9px; letter-spacing: .25em;
+    text-transform: uppercase;
+    color: var(--gray-mid);
+    margin-bottom: 16px;
+    padding-bottom: 8px;
+    border-bottom: var(--rule);
+  }
+  .stat-block {
+    margin-bottom: 24px;
+    padding-bottom: 24px;
+    border-bottom: 1px solid var(--gray-light);
+  }
+  .stat-block:last-child { border-bottom: none; }
+  .stat-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 48px;
+    font-weight: 900;
+    line-height: 1;
+    color: var(--red);
+    margin-bottom: 4px;
+  }
+  .stat-label {
+    font-size: 12px;
+    line-height: 1.5;
+    color: var(--gray-dark);
+    font-weight: 300;
+  }
+
+  /* ─── CONTENT GRID ─── */
+  .content-grid {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 40px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 0;
+  }
+  .col {
+    padding: 32px 28px 40px;
+    border-right: var(--rule);
+  }
+  .col:first-child { padding-left: 0; }
+  .col:last-child { border-right: none; padding-right: 0; }
+
+  h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px; font-weight: 700;
+    line-height: 1.25;
+    margin-bottom: 14px;
+  }
+  h2.italic { font-style: italic; }
+  p {
+    font-size: 15px;
+    line-height: 1.75;
+    margin-bottom: 14px;
+    font-weight: 300;
+  }
+
+  /* ─── PULL QUOTE ─── */
+  .pull-quote {
+    background: var(--ink);
+    color: var(--paper);
+    padding: 32px 40px;
+    margin: 0;
+  }
+  .pull-quote blockquote {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(22px, 3vw, 34px);
+    font-style: italic;
+    line-height: 1.4;
+    max-width: 900px;
+    margin: 0 auto 16px;
+    text-align: center;
+  }
+  .pull-quote cite {
+    display: block;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px; letter-spacing: .2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    text-align: center;
+  }
+
+  /* ─── TIMELINE ─── */
+  .timeline-section {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 40px 48px;
+    border-top: 3px solid var(--ink);
+  }
+  .section-header {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px; letter-spacing: .3em;
+    text-transform: uppercase;
+    padding: 20px 0 24px;
+    border-bottom: var(--rule);
+    margin-bottom: 32px;
+    display: flex; align-items: center; gap: 12px;
+    color: var(--gray-dark);
+  }
+  .section-header::after {
+    content: ''; flex: 1; height: 1px; background: var(--gray-light);
+  }
+
+  .timeline {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0;
+  }
+  .tl-item {
+    padding: 0 24px 0 0;
+    border-right: var(--rule);
+    position: relative;
+  }
+  .tl-item:last-child { border-right: none; padding-right: 0; }
+  .tl-item + .tl-item { padding-left: 24px; }
+  .tl-date {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px; letter-spacing: .15em;
+    text-transform: uppercase;
+    color: var(--red);
+    margin-bottom: 8px;
+  }
+  .tl-headline {
+    font-family: 'Playfair Display', serif;
+    font-size: 16px; font-weight: 700;
+    line-height: 1.3;
+    margin-bottom: 8px;
+  }
+  .tl-body {
+    font-size: 13px;
+    line-height: 1.65;
+    color: var(--gray-dark);
+    font-weight: 300;
+  }
+
+  /* ─── CHARGES BOX ─── */
+  .charges-strip {
+    background: var(--red);
+    color: var(--paper);
+    padding: 32px 40px;
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    gap: 40px;
+    align-items: center;
+  }
+  .charges-label {
+    font-family: 'Playfair Display', serif;
+    font-size: 28px; font-weight: 900;
+    font-style: italic;
+    line-height: 1.2;
+    border-right: 1px solid rgba(255,255,255,.3);
+    padding-right: 40px;
+  }
+  .charges-list {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px 32px;
+    list-style: none;
+  }
+  .charges-list li {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px; letter-spacing: .1em;
+    text-transform: uppercase;
+    display: flex; align-items: flex-start; gap: 8px;
+    line-height: 1.5;
+  }
+  .charges-list li::before {
+    content: '▸';
+    flex-shrink: 0;
+    margin-top: 1px;
+    opacity: .7;
+  }
+
+  /* ─── REACTION GRID ─── */
+  .reactions {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 40px 48px;
+  }
+  .reaction-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0;
+    border: var(--rule);
+  }
+  .reaction-item {
+    padding: 24px;
+    border-right: var(--rule);
+    border-bottom: var(--rule);
+  }
+  .reaction-item:nth-child(3n) { border-right: none; }
+  .reaction-item:nth-last-child(-n+3) { border-bottom: none; }
+  .reaction-flag {
+    font-size: 24px; margin-bottom: 10px;
+  }
+  .reaction-country {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 9px; letter-spacing: .2em;
+    text-transform: uppercase;
+    color: var(--gray-mid);
+    margin-bottom: 8px;
+  }
+  .reaction-stance {
+    font-family: 'Playfair Display', serif;
+    font-size: 15px; font-weight: 700;
+    margin-bottom: 6px;
+  }
+  .stance-comply { color: #1a7a3a; }
+  .stance-refuse { color: var(--red); }
+  .stance-ambiguous { color: var(--gold); }
+  .reaction-text {
+    font-size: 12px;
+    line-height: 1.6;
+    color: var(--gray-dark);
+    font-weight: 300;
+  }
+
+  /* ─── BOTTOM RULE / FOOTER ─── */
+  .footer {
+    border-top: 3px double var(--ink);
+    padding: 16px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .footer-text {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 9px; letter-spacing: .15em;
+    text-transform: uppercase;
+    color: var(--gray-mid);
+  }
+
+  /* ─── ANIMATIONS ─── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .hero-main, .hero-sidebar, .col, .tl-item, .reaction-item {
+    animation: fadeUp .6s ease both;
+  }
+  .hero-sidebar { animation-delay: .15s; }
+  .col:nth-child(2) { animation-delay: .1s; }
+  .col:nth-child(3) { animation-delay: .2s; }
+  .tl-item:nth-child(2) { animation-delay: .1s; }
+  .tl-item:nth-child(3) { animation-delay: .2s; }
+  .tl-item:nth-child(4) { animation-delay: .3s; }
+
+  /* ─── RED ACCENT LINE ─── */
+  .red-rule {
+    height: 4px;
+    background: var(--red);
+    width: 100%;
+  }
+
+  @media (max-width: 900px) {
+    .hero { grid-template-columns: 1fr; }
+    .hero-sidebar { border-left: none; border-top: var(--rule); padding-left: 0; padding-top: 24px; }
+    .content-grid { grid-template-columns: 1fr; }
+    .col { border-right: none; border-bottom: var(--rule); padding-left: 0; padding-right: 0; }
+    .timeline { grid-template-columns: 1fr 1fr; gap: 24px 0; }
+    .tl-item { padding: 0 20px 24px 0; border-bottom: var(--rule); }
+    .charges-strip { grid-template-columns: 1fr; }
+    .charges-label { border-right: none; border-bottom: 1px solid rgba(255,255,255,.3); padding-right: 0; padding-bottom: 20px; }
+    .reaction-grid { grid-template-columns: 1fr 1fr; }
+    .reaction-item:nth-child(2n) { border-right: none; }
+    .reaction-item:nth-child(3n) { border-right: var(--rule); }
+    .masthead { flex-direction: column; gap: 6px; }
+    .rule-block, .hero, .content-grid, .timeline-section, .reactions, .footer { padding-left: 20px; padding-right: 20px; }
+    .pull-quote { padding: 24px 20px; }
+    .charges-strip { padding: 24px 20px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="red-rule"></div>
+
+<!-- MASTHEAD -->
+<header class="masthead">
+  <div class="masthead-date">Lunes, 4 de Mayo de 2026</div>
+  <div class="masthead-title">Derecho Internacional · Análisis</div>
+  <div class="masthead-tag">⚠ Orden Activa</div>
+</header>
+
+<div class="rule-block">
+  <div class="rule-line"></div>
+  <span>Corte Penal Internacional · La Haya, Países Bajos</span>
+  <div class="rule-line"></div>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-main">
+    <div class="kicker">Justicia Internacional</div>
+    <h1>La CPI ordena el<br>arresto de<br><em>Netanyahu</em></h1>
+    <p class="hero-deck">
+      Por primera vez en la historia, la Corte Penal Internacional emite órdenes de captura contra el líder en funciones de un aliado occidental, acusado de crímenes de guerra y crímenes de lesa humanidad en Gaza.
+    </p>
+    <div class="byline">
+      Investigación basada en fuentes · ONU · CPI · Amnistía Internacional · Human Rights Watch &nbsp;·&nbsp; Actualizado Mayo 2026
+    </div>
+  </div>
+
+  <aside class="hero-sidebar">
+    <div class="sidebar-label">Cifras del caso</div>
+
+    <div class="stat-block">
+      <div class="stat-num">124</div>
+      <div class="stat-label">Estados miembros obligados a arrestar a Netanyahu si entra a su territorio</div>
+    </div>
+
+    <div class="stat-block">
+      <div class="stat-num">750+</div>
+      <div class="stat-label">Páginas del memorándum presentado por Sudáfrica ante la CIJ</div>
+    </div>
+
+    <div class="stat-block">
+      <div class="stat-num">4,000+</div>
+      <div class="stat-label">Páginas de pruebas y anexos documentando los crímenes alegados</div>
+    </div>
+
+    <div class="stat-block">
+      <div class="stat-num">69k+</div>
+      <div class="stat-label">Palestinos muertos en Gaza según la Comisión de la ONU (2025)</div>
+    </div>
+  </aside>
+</section>
+
+<!-- PULL QUOTE -->
+<div class="pull-quote">
+  <blockquote>
+    "Durante 77 años, ni un solo funcionario israelí ha rendido cuentas por los crímenes contra el pueblo palestino. ¿A dónde podemos acudir si no es a la CPI, nuestro último recurso?"
+  </blockquote>
+  <cite>— Delegación Palestina ante la CPI, noviembre 2025</cite>
+</div>
+
+<!-- THREE COLUMNS -->
+<div class="content-grid">
+  <div class="col">
+    <h2>¿Qué es la CPI y por qué tiene jurisdicción?</h2>
+    <p>La Corte Penal Internacional, fundada en 1998 mediante el Estatuto de Roma, es el único tribunal permanente de alcance global para juzgar individuos —no Estados— por genocidio, crímenes de guerra y crímenes de lesa humanidad.</p>
+    <p>Israel no ha firmado el Estatuto de Roma. Sin embargo, la CPI ejerce jurisdicción porque <strong>Palestina sí es miembro</strong> desde 2015, y los crímenes denunciados se cometieron en territorio palestino. Los jueces rechazaron por unanimidad la impugnación israelí.</p>
+    <p>Esto distingue el caso de la CPI del caso ante la CIJ (Corte Internacional de Justicia), que juzga a <em>Estados</em>, no a personas.</p>
+  </div>
+
+  <div class="col">
+    <h2 class="italic">La solicitud y las órdenes de arresto</h2>
+    <p>El 20 de mayo de 2024, el fiscal jefe Karim Khan solicitó órdenes de arresto contra Netanyahu y su entonces ministro de Defensa, Yoav Gallant. Los cargos centrales: uso del hambre como método de guerra y ataques deliberados a civiles.</p>
+    <p>El 21 de noviembre de 2024, la Sala de Cuestiones Preliminares aprobó las órdenes. La decisión fue hecha pública <strong>en interés de las víctimas</strong> y sus familias, rompiendo la práctica habitual de confidencialidad.</p>
+    <p>Los jueces encontraron "razones para creer" que Netanyahu utilizó el hambre como arma al restringir sistemáticamente la ayuda humanitaria a la Franja de Gaza.</p>
+  </div>
+
+  <div class="col">
+    <h2>Consecuencias prácticas: vivir fugitivo</h2>
+    <p>Desde la emisión de la orden, Netanyahu modificó radicalmente sus hábitos de viaje. En septiembre de 2025, voló a Nueva York tomando una ruta aérea inusualmente larga, evitando deliberadamente el espacio aéreo de Francia y España —países signatarios de la CPI.</p>
+    <p>En abril de 2025 visitó Hungría, un Estado parte de la CPI. El primer ministro Orbán prometió no arrestarlo, y anunció que Hungría se retiraría del Estatuto de Roma —un proceso que tarda un año.</p>
+    <p>Israel intentó anular las órdenes argumentando falta de jurisdicción. La fiscalía respondió que <strong>"no hay base para retirar ni anular"</strong> las órdenes vigentes.</p>
+  </div>
+</div>
+
+<!-- CHARGES STRIP -->
+<div class="charges-strip">
+  <div class="charges-label">Cargos imputados</div>
+  <ul class="charges-list">
+    <li>Uso del hambre como método de guerra</li>
+    <li>Ataques intencionales contra población civil</li>
+    <li>Asesinato y persecución de civiles</li>
+    <li>Tratos inhumanos y actos de exterminio</li>
+    <li>Destrucción deliberada de infraestructura civil</li>
+    <li>Privación de agua y servicios esenciales</li>
+    <li>Bloqueo de ayuda humanitaria</li>
+    <li>Conductas inhumanas como crimen de lesa humanidad</li>
+  </ul>
+</div>
+
+<!-- TIMELINE -->
+<section class="timeline-section">
+  <div class="section-header">Cronología del Caso</div>
+
+  <div class="timeline">
+    <div class="tl-item">
+      <div class="tl-date">Mayo 2024</div>
+      <div class="tl-headline">El fiscal solicita las órdenes</div>
+      <div class="tl-body">Karim Khan presenta formalmente la solicitud de arresto ante la Sala de Cuestiones Preliminares, desencadenando una tormenta diplomática internacional.</div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-date">Nov. 2024</div>
+      <div class="tl-headline">La CPI emite las órdenes de arresto</div>
+      <div class="tl-body">Los jueces aprueban las órdenes por unanimidad, convirtiéndose en el primer caso histórico contra un líder aliado occidental en ejercicio.</div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-date">Feb. 2025</div>
+      <div class="tl-headline">Trump sanciona a la CPI</div>
+      <div class="tl-body">La administración Trump decreta sanciones económicas y de viaje contra el fiscal Khan y otros miembros del tribunal, bloqueando sus activos en EE.UU.</div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-date">Mar. 2026</div>
+      <div class="tl-headline">Estado actual: órdenes vigentes</div>
+      <div class="tl-body">Israel presentó su contramemoria ante la CIJ. La presidenta de la CPI exige a los 124 Estados miembros el cumplimiento urgente de las órdenes de detención.</div>
+    </div>
+  </div>
+</section>
+
+<!-- REACTION GRID -->
+<section class="reactions">
+  <div class="section-header">Reacciones Internacionales</div>
+
+  <div class="reaction-grid">
+    <div class="reaction-item">
+      <div class="reaction-flag">🇺🇸</div>
+      <div class="reaction-country">Estados Unidos</div>
+      <div class="reaction-stance stance-refuse">Se niega a cumplir</div>
+      <div class="reaction-text">Trump calificó las órdenes de "ilegítimas" y sancionó a la CPI. Biden las llamó "indignantes". EE.UU. no es miembro del tribunal y bloquea sanciones en el Consejo de Seguridad.</div>
+    </div>
+
+    <div class="reaction-item">
+      <div class="reaction-flag">🇭🇺</div>
+      <div class="reaction-country">Hungría</div>
+      <div class="reaction-stance stance-refuse">Desobedece e inicia retirada</div>
+      <div class="reaction-text">Orbán recibió a Netanyahu en Budapest en abril de 2025, prometiendo no arrestarlo. Posteriormente anunció la salida de Hungría del Estatuto de Roma.</div>
+    </div>
+
+    <div class="reaction-item">
+      <div class="reaction-flag">🇬🇧</div>
+      <div class="reaction-country">Reino Unido</div>
+      <div class="reaction-stance stance-ambiguous">Posición ambigua</div>
+      <div class="reaction-text">Como miembro de la CPI, está obligado a detener a Netanyahu si pisa su territorio. El gobierno ha evitado pronunciarse con claridad sobre si lo haría.</div>
+    </div>
+
+    <div class="reaction-item">
+      <div class="reaction-flag">🇩🇪</div>
+      <div class="reaction-country">Alemania</div>
+      <div class="reaction-stance stance-comply">Obligación jurídica</div>
+      <div class="reaction-text">Como miembro de la CPI, Alemania está jurídicamente obligada a ejecutar la orden. Funcionarios reconocieron que tendrían que actuar si Netanyahu entrara al país.</div>
+    </div>
+
+    <div class="reaction-item">
+      <div class="reaction-flag">🇿🇦</div>
+      <div class="reaction-country">Sudáfrica</div>
+      <div class="reaction-stance stance-comply">Impulsa el caso</div>
+      <div class="reaction-text">Presentó la demanda histórica ante la CIJ el 29 de diciembre de 2023. Continúa siendo el principal impulsor del proceso judicial internacional contra Israel.</div>
+    </div>
+
+    <div class="reaction-item">
+      <div class="reaction-flag">🇮🇱</div>
+      <div class="reaction-country">Israel</div>
+      <div class="reaction-stance stance-refuse">Rechaza toda jurisdicción</div>
+      <div class="reaction-text">Netanyahu llamó al fallo "una marca de vergüenza". Israel argumenta que la CPI no tiene autoridad sobre sus ciudadanos al no haber firmado el Estatuto de Roma.</div>
+    </div>
+  </div>
+</section>
+
+<!-- FINAL QUOTE -->
+<div class="pull-quote" style="background: #1a1208; border-top: 4px solid var(--gold);">
+  <blockquote style="font-size: clamp(18px, 2.5vw, 26px);">
+    "Es la primera vez en la historia que la Corte Penal Internacional emite órdenes de arresto contra el líder en funciones de un aliado occidental. El desenlace definirá si el derecho internacional tiene dientes reales, o si la impunidad sigue siendo el privilegio de los poderosos."
+  </blockquote>
+  <cite style="color: var(--gold);">— Análisis / Investigación basada en fuentes de la ONU, CPI, Amnistía Internacional y Human Rights Watch</cite>
+</div>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-text">Fuentes: ONU · CPI · Amnistía Internacional · Human Rights Watch · France 24 · Wikipedia</div>
+  <div class="footer-text">Información verificada · Actualizado mayo 2026</div>
+</footer>
+
+<div class="red-rule"></div>
+
+</body>
+</html>
